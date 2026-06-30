@@ -15,7 +15,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
-import static com.google.common.primitives.Ints.indexOf;
+import static org.apache.commons.lang3.ArrayUtils.indexOf;
 
 public class AuctionListener implements Listener {
 

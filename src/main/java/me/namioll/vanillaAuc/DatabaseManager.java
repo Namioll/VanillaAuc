@@ -146,15 +146,36 @@ public class DatabaseManager {
         return lots;
     }
 
-    public void deleteLot(int id) {
+    public boolean deleteLot(int id) {
         String sql = "DELETE FROM auction WHERE id = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, id);
+
+            int flag = stmt.executeUpdate();
+            stmt.executeUpdate();
+            stmt.close();
+            return flag > 0;
+        } catch (SQLException e) {
+            plugin.getLogger().severe("Ошибка удаления лота: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public void insertLotWithId(AuctionItem lot) {
+        String sql = "INSERT INTO auction (id, seller_uuid, seller_name, item_data, price, listed_at) VALUES (?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, lot.id());
+            stmt.setString(2, lot.sellerUuid().toString());
+            stmt.setString(3, lot.sellerName());
+            stmt.setBytes(4, serializeItem(lot.item()));
+            stmt.setInt(5, lot.price());
+            stmt.setLong(6, lot.listedAt());
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException e) {
-            plugin.getLogger().severe("Ошибка удаления лота: " + e.getMessage());
+            plugin.getLogger().severe("Ошибка восстановления лота: " + e.getMessage());
         }
     }
 
