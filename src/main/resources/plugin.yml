@@ -1,0 +1,6 @@
+name: VanillaAuc
+version: '1.0'
+main: me.namioll.vanillaAuc.VanillaAuc
+api-version: '1.21'
+authors: [ _Lolliman_ ]
+description: Лёгкий аукцион для товарообмена на Вашем выживании :)
