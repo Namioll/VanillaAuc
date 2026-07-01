@@ -27,6 +27,7 @@ public class BuyItemListener implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent e) {
+        if (e.getClickedInventory() == null) return;
         if (!(e.getInventory().getHolder() instanceof LotGUIHolder holder)) return;
         e.setCancelled(true);
 
@@ -41,12 +42,14 @@ public class BuyItemListener implements Listener {
             }
 
             if (lot.sellerUuid().equals(p.getUniqueId())) {
+                p.closeInventory();
                 p.sendRichMessage("<red>Вы не можете купить свой лот! Если хотите его забрать, воспользуйтесь специальной кнопкой на главной странице.");
                 return;
             }
 
             int price = lot.price();
             if (countOre(p) < price) {
+                p.closeInventory();
                 p.sendRichMessage("<red>Недостаточно АРов.");
                 return;
             }

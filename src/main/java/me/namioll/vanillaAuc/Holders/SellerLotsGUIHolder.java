@@ -1,6 +1,7 @@
 package me.namioll.vanillaAuc.Holders;
 
 import me.namioll.vanillaAuc.AuctionItem;
+import me.namioll.vanillaAuc.DatabaseManager;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.jetbrains.annotations.NotNull;
@@ -9,10 +10,10 @@ import java.util.List;
 
 public class SellerLotsGUIHolder implements InventoryHolder {
 
-    private final List<AuctionItem> lots;
+    private final List<AuctionItem> sellerLots;
 
-    public SellerLotsGUIHolder(List<AuctionItem> lots) {
-        this.lots = lots;
+    public SellerLotsGUIHolder(List<AuctionItem> sellerLots) {
+        this.sellerLots = sellerLots;
     }
 
     @Override
@@ -20,5 +21,5 @@ public class SellerLotsGUIHolder implements InventoryHolder {
         return null;
     }
 
-    public List<AuctionItem> getLots() { return lots; }
+    public List<AuctionItem> getSellerLots() { return sellerLots; }
 }

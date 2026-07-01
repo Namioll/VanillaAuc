@@ -36,6 +36,7 @@ public class AuctionListener implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent e) {
+        if (e.getClickedInventory() == null) return;
         if (!(e.getClickedInventory().getHolder() instanceof AuctionHolder holder)) return;
         e.setCancelled(true);
 
@@ -47,26 +48,30 @@ public class AuctionListener implements Listener {
         int slotIndex = indexOf(ITEM_SLOTS, slot);
 
         if (slotIndex != -1) {
-            int lotIndex = page * 26 + slotIndex;
+            int lotIndex = page * 28 + slotIndex;
 
             if (lotIndex < lots.size()) {
                 AuctionItem lot = lots.get(lotIndex);
-                LotGUI.createLotGUI(lot);
+                p.closeInventory();
+                p.openInventory(LotGUI.createLotGUI(lot));
             }
             return;
         }
 
         if (slot == 48 && e.getCurrentItem().getType() != Material.GRAY_STAINED_GLASS_PANE) {
+            p.closeInventory();
             p.openInventory(AuctionGUI.createAuctionGUI(lots, page-1));
             return;
         }
 
         if (slot == 50 && e.getCurrentItem().getType() != Material.GRAY_STAINED_GLASS_PANE) {
+            p.closeInventory();
             p.openInventory(AuctionGUI.createAuctionGUI(lots, page+1));
             return;
         }
 
         if (slot == 49) {
+            p.closeInventory();
             new BukkitRunnable() {
 
                 @Override
@@ -82,7 +87,6 @@ public class AuctionListener implements Listener {
                     }.runTask(plugin);
                 }
             }.runTaskAsynchronously(plugin);
-            return;
         }
     }
 }

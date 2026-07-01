@@ -73,7 +73,7 @@ public class AuctionGUI {
 
         inv.setItem(49, syndyk);
 
-        int startIndex = page*26;
+        int startIndex = page*28;
         long remained = 3 * 24 * 60 * 60 * 1000;
 
         for (int i = 0; i < ITEM_SLOTS.length; i++) {
