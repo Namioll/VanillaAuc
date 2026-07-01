@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class AuctionHolder implements InventoryHolder {
-    private final List<AuctionItem> lots;
+    private List<AuctionItem> lots;
     private final int page;
 
     public AuctionHolder(List<AuctionItem> lots, int page) {
@@ -18,6 +18,7 @@ public class AuctionHolder implements InventoryHolder {
 
     public List<AuctionItem> getLots() { return lots; }
     public int getPage() { return page; }
+    public void setLots(List<AuctionItem> lots) { this.lots = lots; }
 
     @Override
     public @NotNull Inventory getInventory() { return null; }
